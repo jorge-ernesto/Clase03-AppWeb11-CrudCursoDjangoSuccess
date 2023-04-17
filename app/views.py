@@ -3,13 +3,11 @@ from .models import Curso
 from django.contrib import messages
 
 # Create your views here.
-# uso de  framework ORM
 
 def home(request):
     cursosListados = Curso.objects.all()
     #messages.success(request, '¡Cursos listados!')
     return render(request, "gestionCursos.html", {"cursos": cursosListados})
-
 
 def registrarCurso(request):
     codigo = request.POST['txtCodigo']
@@ -21,11 +19,9 @@ def registrarCurso(request):
     messages.success(request, '¡Curso registrado!')
     return redirect('/')
 
-
 def edicionCurso(request, codigo):
     curso = Curso.objects.get(codigo=codigo)
     return render(request, "edicionCurso.html", {"curso": curso})
-
 
 def editarCurso(request): #actualizar
     codigo = request.POST['txtCodigo']
@@ -40,11 +36,8 @@ def editarCurso(request): #actualizar
 
     return redirect('/')
 
-
 def eliminarCurso(request, codigo):
     curso = Curso.objects.get(codigo=codigo)
     curso.delete()
     messages.success(request, '¡Curso eliminado!')
     return redirect('/')
-
-
